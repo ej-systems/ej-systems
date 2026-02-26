@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EJ Systems LLC — Technology for the Real World</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9fafb; color: #111827; }
+
+  /* NAV */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: #111827;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: -0.5px;
+  }
+  .logo-text { font-size: 1.1rem; font-weight: 700; color: #111827; letter-spacing: -0.3px; }
+  .logo-text span { color: #6b7280; font-weight: 400; }
+  nav a { color: #6b7280; text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 28px; transition: color 0.15s; }
+  nav a:hover { color: #111827; }
+  .nav-cta {
+    background: #111827;
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+  }
+  .nav-cta:hover { background: #1f2937; color: #fff !important; }
+
+  /* HERO */
+  .hero {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 100px 40px 80px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .hero-tag .dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #111827;
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: #2563eb; font-style: normal; }
+  .hero p {
+    font-size: 1.15rem;
+    color: #6b7280;
+    max-width: 540px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: #111827;
+    color: #fff;
+    padding: 13px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: #1f2937; }
+  .btn-secondary {
+    color: #374151;
+    padding: 13px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    transition: border-color 0.15s;
+  }
+  .btn-secondary:hover { border-color: #9ca3af; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid #e5e7eb; max-width: 960px; margin: 0 auto; }
+
+  /* PRODUCTS */
+  .section { max-width: 960px; margin: 0 auto; padding: 72px 40px; }
+  .section-label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-bottom: 12px;
+  }
+  .section h2 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .section .sub { color: #6b7280; font-size: 1rem; margin-bottom: 40px; }
+
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .product-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 28px;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+  .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-color: #d1d5db; }
+  .product-card.featured { border-color: #2563eb; }
+  .product-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+  .icon-blue { background: #eff6ff; }
+  .icon-green { background: #f0fdf4; }
+  .icon-gray { background: #f9fafb; border: 1px solid #e5e7eb; }
+  .product-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+  .product-card p { font-size: 0.88rem; color: #6b7280; line-height: 1.55; margin-bottom: 16px; }
+  .product-link { font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none; }
+  .product-link:hover { text-decoration: underline; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-live { background: #dcfce7; color: #15803d; }
+  .badge-soon { background: #fef9c3; color: #854d0e; }
+  .badge-dev { background: #f3f4f6; color: #6b7280; }
+
+  /* VALUES */
+  .values-bg { background: #fff; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
+  .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
+  .value {
+    padding: 36px 32px;
+    border-right: 1px solid #e5e7eb;
+  }
+  .value:last-child { border-right: none; }
+  .value-icon { font-size: 1.5rem; margin-bottom: 12px; }
+  .value h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .value p { font-size: 0.83rem; color: #6b7280; line-height: 1.5; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text h2 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .about-text p { color: #6b7280; line-height: 1.65; margin-bottom: 16px; font-size: 0.95rem; }
+  .about-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .about-card h4 { font-size: 0.9rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+  .about-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+  .about-item-icon { color: #10b981; font-size: 0.9rem; margin-top: 2px; }
+  .about-item-text { font-size: 0.88rem; color: #374151; line-height: 1.4; }
+
+  /* CONTACT */
+  .contact-bg { background: #111827; }
+  .contact { max-width: 960px; margin: 0 auto; padding: 72px 40px; text-align: center; }
+  .contact h2 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .contact p { color: #9ca3af; font-size: 1rem; margin-bottom: 28px; }
+  .contact a.btn-contact {
+    display: inline-block;
+    background: #fff;
+    color: #111827;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+  }
+  .contact a.btn-contact:hover { background: #f3f4f6; }
+
+  /* FOOTER */
+  footer {
+    background: #111827;
+    border-top: 1px solid #1f2937;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer .footer-logo { color: #9ca3af; font-size: 0.85rem; }
+  footer .footer-logo strong { color: #fff; }
+  footer nav a { color: #6b7280; font-size: 0.82rem; margin-left: 20px; }
+  footer nav a:hover { color: #9ca3af; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-mark">EJ</div>
+    <div class="logo-text">EJ Systems <span>LLC</span></div>
+  </div>
+  <div style="display:flex;align-items:center;">
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="mailto:hello@ej-sys.com" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">
+    <span class="dot"></span>
+    Ohio LLC · Est. 2025
+  </div>
+  <h1>Technology that solves <em>real problems</em> for real people.</h1>
+  <p>EJ Systems builds practical software tools focused on transparency, accessibility, and helping everyday Ohioans navigate systems that were never designed with them in mind.</p>
+  <div class="hero-actions">
+    <a href="#products" class="btn-primary">See Our Products</a>
+    <a href="mailto:hello@ej-sys.com" class="btn-secondary">Get in Touch</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PRODUCTS -->
+<div id="products" class="section">
+  <div class="section-label">Products</div>
+  <h2>What we're building</h2>
+  <p class="sub">Tools designed to be genuinely useful — not just impressive demos.</p>
+
+  <div class="products">
+    <div class="product-card featured">
+      <div class="product-icon icon-blue">⚡</div>
+      <h3>Ohio Rate Watch <span class="badge badge-live">Live</span></h3>
+      <p>Rate monitoring and alerts for Ohio natural gas and electricity customers. We watch 254+ supplier offers daily so you know when it's time to switch — and when it isn't.</p>
+      <a href="https://ohioratewatch.com" class="product-link">ohioratewatch.com →</a>
+    </div>
+
+
+
+    <div class="product-card">
+      <div class="product-icon icon-gray">🔧</div>
+      <h3>Custom Solutions <span class="badge badge-soon">Available</span></h3>
+      <p>Need a specific tool built? We work with small businesses and individuals on focused projects — web apps, automation, data pipelines, and homelab infrastructure.</p>
+      <a href="mailto:hello@ej-sys.com" class="product-link">Let's talk →</a>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values-bg">
+  <div style="max-width:960px;margin:0 auto;">
+    <div class="values">
+      <div class="value">
+        <div class="value-icon">🔍</div>
+        <h4>Transparency first</h4>
+        <p>We build tools that surface information people have a right to, in a way they can actually use.</p>
+      </div>
+      <div class="value">
+        <div class="value-icon">🏡</div>
+        <h4>Ohio-rooted</h4>
+        <p>Based in Cleveland. We build for our community first — the people we know, the problems we live.</p>
+      </div>
+      <div class="value">
+        <div class="value-icon">🔒</div>
+        <h4>Privacy-conscious</h4>
+        <p>No unnecessary data collection. No selling your information. Simple, honest tools.</p>
+      </div>
+      <div class="value">
+        <div class="value-icon">⚙️</div>
+        <h4>Practical over flashy</h4>
+        <p>We'd rather ship something useful than something impressive. Useful compounds; impressive fades.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">About</div>
+      <h2>A small company building focused tools.</h2>
+      <p>EJ Systems LLC is an Ohio-based technology company founded in 2025. We're a lean operation — focused on building a small number of products well rather than spreading thin across a dozen ideas.</p>
+      <p>Our background is in homelab infrastructure, software development, and systems automation. We're makers at heart, which means we tend to build things we wish already existed.</p>
+      <p>Ohio Rate Watch started because of a personal experience getting burned by an energy supplier contract with buried fees. We figured if it happened to us, it was happening to a lot of people who had even fewer tools to protect themselves.</p>
+    </div>
+    <div>
+      <div class="about-card">
+        <h4>Company Details</h4>
+        <div class="about-item">
+          <span class="about-item-icon">✓</span>
+          <span class="about-item-text">Ohio LLC, filed March 2025</span>
+        </div>
+        <div class="about-item">
+          <span class="about-item-icon">✓</span>
+          <span class="about-item-text">Cleveland, Ohio (Cuyahoga County)</span>
+        </div>
+        <div class="about-item">
+          <span class="about-item-icon">✓</span>
+          <span class="about-item-text">EIN registered with IRS</span>
+        </div>
+        <div class="about-item">
+          <span class="about-item-icon">✓</span>
+          <span class="about-item-text">Business banking established</span>
+        </div>
+        <div class="about-item">
+          <span class="about-item-icon">✓</span>
+          <span class="about-item-text">General contact: <a href="mailto:hello@ej-sys.com" style="color:#2563eb;">hello@ej-sys.com</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT CTA -->
+<div class="contact-bg">
+  <div class="contact">
+    <h2>Want to work together?</h2>
+    <p>Affiliate inquiries, custom development, or just have a question — we're easy to reach.</p>
+    <a href="mailto:hello@ej-sys.com" class="btn-contact">hello@ej-sys.com</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><strong>EJ Systems LLC</strong> · Cleveland, Ohio · © 2025</div>
+  <nav>
+    <a href="https://ohioratewatch.com">Ohio Rate Watch</a>
+    <a href="mailto:hello@ej-sys.com">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>
